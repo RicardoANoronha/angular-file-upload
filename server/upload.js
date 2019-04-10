@@ -2,7 +2,9 @@ const IncomingForm = require('formidable').IncomingForm;
 const fs = require('fs');
 
 module.exports = function upload(req, res) {
-  var form = new IncomingForm();
+  // To avoid issue for the limit of max file size upload 
+  var opts = { maxFileSize: 1 * 1024 * 1024 * 1024 };
+  var form = new IncomingForm(opts);
   let readStream;
   form.on('file', (field, file) => {
     // Do something with the file
